@@ -1,0 +1,50 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Subtraction {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean continueGame = true;
+
+        while (continueGame) {
+            // Generate two single-digit random integers
+            int number1 = (int) (Math.random() * 10);
+            int number2 = (int) (Math.random() * 10);
+
+            // Ensure number1 is greater than or equal to number2
+            if (number1 < number2) {
+                int temp = number1;
+                number1 = number2;
+                number2 = temp;
+            }
+
+            // Prompt the student for the subtraction question
+            System.out.print("What is " + number1 + " - " + number2 + "? ");
+
+            try {
+                // Read student's answer
+                int answer = scanner.nextInt();
+
+                // Check and display the correctness of the answer
+                if (answer == (number1 - number2)) {
+                    System.out.println("Correct!");
+                } else {
+                    System.out.println("Incorrect. The correct answer is: " + (number1 - number2));
+                }
+
+                // Ask if the user wants to continue
+                System.out.print("Do you want to play again? (yes/no): ");
+                String playAgain = scanner.next().toLowerCase();
+                continueGame = playAgain.equals("yes");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+                scanner.next(); // Clear the invalid input
+            }
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+
